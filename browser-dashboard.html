@@ -1,0 +1,156 @@
+<!--
+  README:
+  This HTML document creates a Browser Environment Dashboard.
+  It includes:
+  - Personal and course profile displayed at the top.
+  - JavaScript code to fetch and display browser and screen details.
+  - Navigation buttons using location and history objects.
+  - Background color changes dynamically based on screen width:
+    * Blue for Mobile (<600px)
+    * Green for Tablet (600–991px)
+    * Orange for Desktop (≥992px)
+  JavaScript comments are included to explain each functionality block.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Browser Environment Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #004080;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin-bottom: 10px;
+    }
+    .profile-info {
+      background-color: #e6f0ff;
+      padding: 15px 20px;
+      margin: 10px auto;
+      border-radius: 10px;
+      max-width: 800px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .dashboard {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .dashboard h2 {
+      color: #004080;
+    }
+    .dashboard ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .dashboard li {
+      padding: 8px 0;
+      border-bottom: 1px solid #ccc;
+    }
+    .nav-controls {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .nav-controls button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #004080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .nav-controls button:hover {
+      background-color: #0059b3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <h1>Browser Environment Dashboard</h1>
+  </header>
+
+  <!-- Profile Section -->
+  <div class="profile-info">
+    <p><strong>Complete Name:</strong>John Rey Lovete</p>
+    <p><strong>Sex:</strong> Male</p>
+    <p><strong>Address:</strong>Amugis, Lagonoy Camarines Sur</p>
+    <p><strong>Course, Year, and Section:</strong>BSIT2A</p>
+    <p><strong>Name of School:</strong>Partido State University</p>
+    <p><strong>Semester and Academic Year:</strong> 2nd Semester, AY 2024-2025</p>
+    <p><strong>Subject Code and Title:</strong>PF2 - Event Driven Programming</p>
+    <p><strong>Name of Subject Instructor:</strong>Arjay Abio</p>
+  </div>
+
+  <!-- Browser Info Dashboard -->
+  <div class="dashboard">
+    <h2>Browser Information</h2>
+    <ul id="browser-info"></ul>
+
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+      <h2>Navigation Controls</h2>
+      <button onclick="location.reload()">Reload Page</button>
+      <button onclick="location.href='https://www.example.com'">Go to Example.com</button>
+      <button onclick="history.back()">Go Back</button>
+      <button onclick="history.forward()">Go Forward</button>
+    </div>
+  </div>
+
+  <script>
+    // Reference to the list element that will display browser info
+    const infoList = document.getElementById("browser-info");
+
+    // Collect browser-related data
+    const browserData = [
+      { label: "Browser Name and Version", value: navigator.userAgent },
+      { label: "Platform (OS)", value: navigator.platform },
+      { label: "Java Enabled", value: navigator.javaEnabled() ? "Yes" : "No" },
+      { label: "Screen Resolution", value: `${screen.width} x ${screen.height}` },
+      { label: "Available Screen Size", value: `${screen.availWidth} x ${screen.availHeight}` },
+      { label: "Color Depth", value: `${screen.colorDepth} bits` },
+    ];
+
+    // Display each piece of data as a list item in the browser info section
+    browserData.forEach(item => {
+      const li = document.createElement("li");
+      li.innerHTML = `<strong>${item.label}:</strong> ${item.value}`;
+      infoList.appendChild(li);
+    });
+
+    // Function to dynamically change background color based on screen width
+    function updateBackgroundColor() {
+      const width = window.innerWidth;
+
+      if (width < 600) {
+        document.body.style.backgroundColor = "#ADD8E6"; // Mobile - Blue
+      } else if (width >= 600 && width < 992) {
+        document.body.style.backgroundColor = "#90EE90"; // Tablet - Green
+      } else {
+        document.body.style.backgroundColor = "#FFA500"; // Desktop - Orange
+      }
+    }
+
+    // Run once on initial page load
+    updateBackgroundColor();
+
+    // Update background color whenever window size changes
+    window.addEventListener("resize", updateBackgroundColor);
+  </script>
+
+</body>
+</html>
